@@ -1,0 +1,22 @@
+.prism-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.prism-container canvas {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: cover;
+
+  /* Smooth visual polish */
+  filter: blur(1px) brightness(1.1) contrast(1.05);
+  will-change: transform;
+}
