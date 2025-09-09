@@ -54,29 +54,27 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
           <div className="flex-shrink-0">
             <button
               onClick={() => scrollToSection('home')}
-              className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+              className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
             >
               VS
             </button>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
-                    activeSection === item.id
-                      ? 'text-primary border-b-2 border-primary'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+          <div className="hidden md:flex items-center space-x-3">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeSection === item.id
+                    ? 'bg-cyan-600 text-white shadow-md'
+                    : 'bg-gray-700 text-white hover:scale-105 hover:border-2 hover:border-cyan-500'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
 
           {/* Theme Toggle & Mobile Menu */}
@@ -107,15 +105,15 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-card/95 backdrop-blur-lg rounded-lg mt-2 shadow-medium">
+            <div className="px-2 pt-2 pb-3 space-y-2 bg-card/95 backdrop-blur-lg rounded-lg mt-2 shadow-medium flex flex-col">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
+                  className={`w-full text-left px-6 py-2 rounded-full text-base font-medium transition-all duration-300 ${
                     activeSection === item.id
-                      ? 'text-primary bg-primary/10'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'bg-cyan-600 text-white shadow-md'
+                      : 'bg-gray-700 text-white hover:scale-105 hover:border-2 hover:border-cyan-500'
                   }`}
                 >
                   {item.label}
