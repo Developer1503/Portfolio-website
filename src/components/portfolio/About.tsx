@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Code, Brain, Shield, Users } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import vedantHeadshot from '@/assets/vedant-headshot.jpg';
+import PixelBlast from "@/components/ui/pixle-blast";
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -48,8 +49,14 @@ const About = () => {
   ];
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" ref={sectionRef} className="relative py-20 bg-muted/30 overflow-hidden">
+      {/* Pixel Blast Background */}
+      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+        <PixelBlast />
+      </div>
+
+      {/* Content Wrapper */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="fade-on-scroll">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
             About <span className="bg-gradient-primary bg-clip-text text-transparent">Me</span>
@@ -59,6 +66,7 @@ const About = () => {
           </p>
         </div>
 
+        {/* Grid Layout */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           {/* Profile Image */}
           <div className="fade-on-scroll flex justify-center lg:justify-start">
