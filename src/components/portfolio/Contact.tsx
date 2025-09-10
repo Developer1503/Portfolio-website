@@ -29,14 +29,14 @@ const Contact = () => {
     {
       icon: <Mail className="h-5 w-5" />,
       label: 'Email',
-      value: 'vedant.shinde@example.com',
-      link: 'mailto:vedant.shinde@example.com'
+      value: 'vedantshinde305@example.com',
+      link: 'mailto:vedantshinde305@example.com'
     },
     {
       icon: <Phone className="h-5 w-5" />,
       label: 'Phone',
-      value: '+91 98765 43210',
-      link: 'tel:+919876543210'
+      value: '+91 86524 00980',
+      link: 'tel:+918652400980'
     },
     {
       icon: <MapPin className="h-5 w-5" />,
