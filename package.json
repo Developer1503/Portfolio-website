@@ -48,6 +48,7 @@
     "gsap": "^3.13.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.462.0",
+    "motion": "^12.23.12",
     "next-themes": "^0.3.0",
     "ogl": "^1.0.11",
     "postprocessing": "^6.37.7",
@@ -61,7 +62,7 @@
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.180.0",
+    "three": "^0.179.1",
     "vaul": "^0.9.9",
     "zod": "^3.25.76"
   },

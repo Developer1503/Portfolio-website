@@ -3,6 +3,7 @@ import { Code, Brain, Shield, Users } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import vedantHeadshot from '@/assets/vedant-headshot.jpg';
 import PixelBlast from "@/components/ui/pixle-blast";
+import DecryptedText from "@/components/ui/DecryptedText"; // <-- Import DecryptedText
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,23 +30,27 @@ const About = () => {
     {
       icon: <Brain className="h-8 w-8 text-primary" />,
       title: "AI & Machine Learning",
-      description: "Passionate about developing intelligent systems and ML models for real-world applications"
+      description:
+        "Passionate about developing intelligent systems and ML models for real-world applications",
     },
     {
       icon: <Code className="h-8 w-8 text-accent" />,
       title: "Full-Stack Development",
-      description: "Building scalable web applications with modern technologies and best practices"
+      description:
+        "Building scalable web applications with modern technologies and best practices",
     },
     {
       icon: <Shield className="h-8 w-8 text-secondary" />,
       title: "Cybersecurity Awareness",
-      description: "Focused on building secure applications and understanding digital privacy"
+      description:
+        "Focused on building secure applications and understanding digital privacy",
     },
     {
       icon: <Users className="h-8 w-8 text-primary" />,
       title: "Team Collaboration",
-      description: "Strong communication skills and experience working in collaborative environments"
-    }
+      description:
+        "Strong communication skills and experience working in collaborative environments",
+    },
   ];
 
   return (
@@ -80,26 +85,38 @@ const About = () => {
             </div>
           </div>
 
-          {/* Bio Content */}
+          {/* Bio Content with DecryptedText */}
           <div className="space-y-6 fade-on-scroll">
             <div className="prose prose-lg max-w-none">
-              <p className="text-lg leading-relaxed text-foreground mb-6">
-                I'm currently a <strong className="text-primary">4th-year BTech student in Artificial Intelligence & Machine Learning</strong>, 
-                passionate about leveraging technology to solve complex real-world problems. My journey spans across 
-                machine learning, full-stack development, and cybersecurity awareness.
-              </p>
-              
-              <p className="text-lg leading-relaxed text-foreground mb-6">
-                I specialize in developing <strong className="text-accent">AI-driven healthcare solutions</strong>, 
-                building robust web applications, and creating intelligent systems that make a meaningful impact. 
-                My experience ranges from predictive modeling for medical diagnosis to developing enterprise-ready applications.
-              </p>
+              <DecryptedText
+                text={`I'm currently a 4th-year BTech student in Artificial Intelligence & Machine Learning, passionate about leveraging technology to solve complex real-world problems. My journey spans across machine learning, full-stack development, and cybersecurity awareness.`}
+                speed={40}
+                sequential
+                animateOn="view"
+                className="text-lg leading-relaxed text-foreground"
+                encryptedClassName="text-lg leading-relaxed text-gray-500"
+                parentClassName="block mb-6"
+              />
 
-              <p className="text-lg leading-relaxed text-foreground">
-                As a <strong className="text-secondary">curious problem-solver and continuous learner</strong>, 
-                I thrive in collaborative environments and am always eager to take on new challenges. 
-                My goal is to build AI-powered products that enhance human capabilities and create positive change in society.
-              </p>
+              <DecryptedText
+                text={`I specialize in developing AI-driven healthcare solutions, building robust web applications, and creating intelligent systems that make a meaningful impact. My experience ranges from predictive modeling for medical diagnosis to developing enterprise-ready applications.`}
+                speed={40}
+                sequential
+                animateOn="view"
+                className="text-lg leading-relaxed text-foreground"
+                encryptedClassName="text-lg leading-relaxed text-gray-500"
+                parentClassName="block mb-6"
+              />
+
+              <DecryptedText
+                text={`As a curious problem-solver and continuous learner, I thrive in collaborative environments and am always eager to take on new challenges. My goal is to build AI-powered products that enhance human capabilities and create positive change in society.`}
+                speed={40}
+                sequential
+                animateOn="view"
+                className="text-lg leading-relaxed text-foreground"
+                encryptedClassName="text-lg leading-relaxed text-gray-500"
+                parentClassName="block"
+              />
             </div>
           </div>
         </div>
@@ -109,15 +126,11 @@ const About = () => {
           {highlights.map((highlight, index) => (
             <Card key={index} className="fade-on-scroll project-card border-0 bg-gradient-card">
               <CardContent className="p-6 text-center">
-                <div className="flex justify-center mb-4">
-                  {highlight.icon}
-                </div>
+                <div className="flex justify-center mb-4">{highlight.icon}</div>
                 <h3 className="text-xl font-semibold mb-3 text-foreground">
                   {highlight.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {highlight.description}
-                </p>
+                <p className="text-muted-foreground leading-relaxed">{highlight.description}</p>
               </CardContent>
             </Card>
           ))}
