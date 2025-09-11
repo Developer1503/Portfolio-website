@@ -23,6 +23,7 @@ const Hero: React.FC = () => {
             texts={[
               "Full Stack Developer",
               "AI Engineer",
+              "ML Enthusiast",
               "Open Source Contributor",
               "Problem Solver"
             ]}
