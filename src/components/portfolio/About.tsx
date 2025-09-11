@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Code, Brain, Shield, Users } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
-import vedantHeadshot from '@/assets/vedant-headshot.jpg';
+import vedantHeadshot from '@/assets/vedant-headhot.jpg';
 import PixelBlast from "@/components/ui/pixle-blast";
 import DecryptedText from "@/components/ui/DecryptedText"; // <-- Import DecryptedText
 
