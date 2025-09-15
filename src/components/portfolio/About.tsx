@@ -3,7 +3,6 @@ import { Code, Brain, Shield, Users } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import vedantHeadshot from '@/assets/vedant-headhot.jpg';
 import PixelBlast from "@/components/ui/pixle-blast";
-import DecryptedText from "@/components/ui/DecryptedText"; // <-- Import DecryptedText
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -85,38 +84,26 @@ const About = () => {
             </div>
           </div>
 
-          {/* Bio Content with DecryptedText */}
+          {/* Bio Content without DecryptedText */}
           <div className="space-y-6 fade-on-scroll">
             <div className="prose prose-lg max-w-none">
-              <DecryptedText
-                text={`I'm currently a 4th-year BTech student in Artificial Intelligence & Machine Learning, passionate about leveraging technology to solve complex real-world problems. My journey spans across machine learning, full-stack development, and cybersecurity awareness.`}
-                speed={40}
-                sequential
-                animateOn="view"
-                className="text-lg leading-relaxed text-foreground"
-                encryptedClassName="text-lg leading-relaxed text-gray-500"
-                parentClassName="block mb-6"
-              />
+              <p className="text-lg leading-relaxed text-foreground mb-6">
+                I'm currently a 4th-year BTech student in Artificial Intelligence & Machine Learning,
+                passionate about leveraging technology to solve complex real-world problems. My journey spans across
+                machine learning, full-stack development, and cybersecurity awareness.
+              </p>
 
-              <DecryptedText
-                text={`I specialize in developing AI-driven healthcare solutions, building robust web applications, and creating intelligent systems that make a meaningful impact. My experience ranges from predictive modeling for medical diagnosis to developing enterprise-ready applications.`}
-                speed={40}
-                sequential
-                animateOn="view"
-                className="text-lg leading-relaxed text-foreground"
-                encryptedClassName="text-lg leading-relaxed text-gray-500"
-                parentClassName="block mb-6"
-              />
+              <p className="text-lg leading-relaxed text-foreground mb-6">
+                I specialize in developing AI-driven healthcare solutions, building robust web
+                applications, and creating intelligent systems that make a meaningful impact. My experience
+                ranges from predictive modeling for medical diagnosis to developing enterprise-ready applications.
+              </p>
 
-              <DecryptedText
-                text={`As a curious problem-solver and continuous learner, I thrive in collaborative environments and am always eager to take on new challenges. My goal is to build AI-powered products that enhance human capabilities and create positive change in society.`}
-                speed={40}
-                sequential
-                animateOn="view"
-                className="text-lg leading-relaxed text-foreground"
-                encryptedClassName="text-lg leading-relaxed text-gray-500"
-                parentClassName="block"
-              />
+              <p className="text-lg leading-relaxed text-foreground">
+                As a curious problem-solver and continuous learner, I thrive in collaborative environments
+                and am always eager to take on new challenges. My goal is to build AI-powered products
+                that enhance human capabilities and create positive change in society.
+              </p>
             </div>
           </div>
         </div>
