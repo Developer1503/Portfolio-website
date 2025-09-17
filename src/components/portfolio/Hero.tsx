@@ -123,17 +123,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Simple Scroll Indicator */}
-      <button 
-        onClick={scrollToNextSection}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 animate-bounce hover:animate-none transition-all duration-300"
-        aria-label="Scroll to next section"
-      >
-        <div className="w-6 h-10 border-2 border-indigo-400 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-indigo-400 rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </button>
     </section>
   );
 };
