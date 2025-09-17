@@ -314,7 +314,7 @@ const Skills = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes progress-bar {
           from {
             width: 0;
