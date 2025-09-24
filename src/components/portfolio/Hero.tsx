@@ -59,56 +59,116 @@ const Hero: React.FC = () => {
         )}
       </div>
 
-      {/* Foreground Content */}
+      {/* Foreground Content - Desktop unchanged, Mobile optimized */}
       <div className="relative z-20 container mx-auto px-6 md:px-12 text-center md:text-left">
         <div className="space-y-6 max-w-4xl">
-          {/* Main Heading with Roboto Thin */}
-          <h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin drop-shadow-lg leading-tight tracking-tight roboto-thin"
-            style={{ fontFamily: '"Roboto", sans-serif', fontWeight: 100 }}
-          >
-            Hi, I'm{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-600 bg-clip-text text-transparent">
-              Vedant Shinde
-            </span>
-          </h1>
-
-          {/* Rotating Text */}
-          <h2 className="mt-4 text-lg sm:text-xl md:text-2xl text-gray-300 drop-shadow-md font-medium roboto-regular">
-            I'm a{" "}
-            <RotatingText
-              texts={[
-                "Full Stack Developer",
-                "AI Engineer",
-                "ML Enthusiast",
-                "Open Source Contributor",
-                "Problem Solver",
-              ]}
-              rotationInterval={2500}
-              mainClassName="inline-block text-indigo-400 transition-all duration-500 font-semibold"
-              splitLevelClassName="inline-block"
-              elementLevelClassName="inline-block"
-            />
-          </h2>
-
-          {/* Call to Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center md:justify-start">
-            <button
-              className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-indigo-500/25 roboto-medium"
-              onClick={scrollToNextSection}
+          
+          {/* Desktop Layout - Original unchanged */}
+          <div className="hidden md:block">
+            {/* Main Heading with Roboto Thin */}
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin drop-shadow-lg leading-tight tracking-tight roboto-thin"
+              style={{ fontFamily: '"Roboto", sans-serif', fontWeight: 100 }}
             >
-              View My Work
-            </button>
-            <button className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 roboto-medium">
-              Get In Touch
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
+              Hi, I'm{" "}
+              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-600 bg-clip-text text-transparent">
+                Vedant Shinde
+              </span>
+            </h1>
+
+            {/* Rotating Text */}
+            <h2 className="mt-4 text-lg sm:text-xl md:text-2xl text-gray-300 drop-shadow-md font-medium roboto-regular">
+              I'm a{" "}
+              <RotatingText
+                texts={[
+                  "Full Stack Developer",
+                  "AI Engineer",
+                  "ML Enthusiast",
+                  "Open Source Contributor",
+                  "Problem Solver",
+                ]}
+                rotationInterval={2500}
+                mainClassName="inline-block text-indigo-400 transition-all duration-500 font-semibold"
+                splitLevelClassName="inline-block"
+                elementLevelClassName="inline-block"
+              />
+            </h2>
           </div>
 
-          {/* Stats Section */}
-          <div className="flex justify-center md:justify-start space-x-10 mt-10 text-gray-400">
+          {/* Mobile Optimized Layout */}
+          <div className="block md:hidden space-y-6 text-center px-4">
+            {/* Mobile Welcome Badge */}
+            <div className="inline-block px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/30 rounded-full backdrop-blur-sm mb-4">
+              <span className="text-indigo-400 font-medium text-xs tracking-wide">👋 Welcome to my world</span>
+            </div>
+            
+            {/* Mobile Main Heading - Compact */}
+            <div className="space-y-3">
+              <h1 className="text-3xl font-bold leading-tight tracking-tight">
+                Hi, I'm
+              </h1>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Vedant Shinde
+              </div>
+              
+              {/* Mobile Rotating Text - Stacked */}
+              <div className="space-y-2 mt-4">
+                <p className="text-gray-400 text-sm font-light">I'm a</p>
+                <RotatingText
+                  texts={[
+                    "Full Stack Developer",
+                    "AI Engineer",
+                    "ML Enthusiast",
+                    "Open Source Contributor",
+                    "Problem Solver",
+                  ]}
+                  rotationInterval={2500}
+                  mainClassName="block text-lg font-semibold text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Buttons - Desktop original, Mobile redesigned */}
+          <div className="flex flex-col gap-4 mt-8 justify-center md:justify-start">
+            {/* Desktop buttons - original */}
+            <div className="hidden md:flex md:flex-row md:gap-4">
+              <button
+                className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-indigo-500/25 roboto-medium"
+                onClick={scrollToNextSection}
+              >
+                View My Work
+              </button>
+              <button className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 roboto-medium">
+                Get In Touch
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Mobile buttons - redesigned */}
+            <div className="flex md:hidden flex-col gap-3 px-4">
+              <button
+                className="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-white shadow-lg active:scale-95 transition-all duration-200 flex items-center justify-center gap-2"
+                onClick={scrollToNextSection}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+                View My Work
+              </button>
+              <button className="w-full py-4 border-2 border-indigo-400/60 text-indigo-400 rounded-xl font-semibold backdrop-blur-sm active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+                Get In Touch
+              </button>
+            </div>
+          </div>
+
+          {/* Stats Section - Desktop original, Mobile card-style */}
+          <div className="hidden md:flex md:justify-center md:md:justify-start md:space-x-10 mt-10 text-gray-400">
             <div className="text-center cursor-pointer group">
               <div className="text-2xl md:text-3xl font-bold text-indigo-400 group-hover:text-indigo-300 transition-colors roboto-medium">
                 50+
@@ -129,8 +189,29 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="flex justify-center md:justify-start space-x-5 mt-8">
+          {/* Mobile Stats - Card Style */}
+          <div className="md:hidden mx-4 mt-8">
+            <div className="bg-gray-800/20 backdrop-blur-sm border border-gray-700/30 rounded-2xl p-6">
+              <div className="grid grid-cols-3 gap-6">
+                {[
+                  { number: "50+", label: "Projects", icon: "📂" },
+                  { number: "3+", label: "Years", icon: "⏳" },
+                  { number: "∞", label: "Ideas", icon: "💡" }
+                ].map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-2xl mb-2">{stat.icon}</div>
+                    <div className="text-2xl font-bold text-indigo-400 mb-1">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs text-gray-400 font-medium">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Social Links - Desktop original, Mobile redesigned */}
+          <div className="hidden md:flex md:justify-center md:md:justify-start md:space-x-5 mt-8">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
@@ -141,6 +222,42 @@ const Hero: React.FC = () => {
                 {link.icon}
               </a>
             ))}
+          </div>
+
+          {/* Mobile Social Links - Bottom Sheet Style */}
+          <div className="md:hidden mx-4 mt-6">
+            <div className="bg-gray-800/20 backdrop-blur-sm border border-gray-700/30 rounded-2xl p-4">
+              <div className="flex justify-center space-x-8">
+                {socialLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    aria-label={link.label}
+                    className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-700/30 transition-all duration-200 active:scale-95"
+                  >
+                    <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center">
+                      {link.icon}
+                    </div>
+                    <span className="text-xs text-gray-400 font-medium">{link.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Scroll Indicator */}
+          <div className="md:hidden flex justify-center mt-8">
+            <button 
+              onClick={scrollToNextSection}
+              className="flex flex-col items-center gap-2 text-gray-400 active:scale-95 transition-all duration-200"
+            >
+              <span className="text-xs font-medium">Scroll to explore</span>
+              <div className="w-8 h-8 border border-gray-600 rounded-full flex items-center justify-center animate-bounce">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+            </button>
           </div>
         </div>
       </div>
