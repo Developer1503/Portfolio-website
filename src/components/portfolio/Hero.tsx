@@ -19,10 +19,11 @@ const Hero: React.FC = () => {
   };
 
   const socialLinks = [
-    { href: "#", icon: <GitHubIcon />, label: "GitHub" },
-    { href: "#", icon: <LinkedInIcon />, label: "LinkedIn" },
-    { href: "#", icon: <TwitterIcon />, label: "Twitter" },
-  ];
+  { href: "https://github.com/Developer1503", icon: <GitHubIcon />, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/vedant-shinde-119866242/", icon: <LinkedInIcon />, label: "LinkedIn" },
+  { href: "#", icon: <TwitterIcon />, label: "Twitter" }, // Replace # with your Twitter link if available
+];
+
 
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black text-white">
