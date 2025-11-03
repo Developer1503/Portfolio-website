@@ -24,6 +24,12 @@ export interface BentoProps {
   glowColor?: string;
   clickEffect?: boolean;
   enableMagnetism?: boolean;
+  skills?: Array<{
+    name: string;
+    level: number;
+    category: string;
+    description?: string;
+  }>;
 }
 
 const DEFAULT_PARTICLE_COUNT = 12;
@@ -528,7 +534,8 @@ const MagicBento: React.FC<BentoProps> = ({
   enableTilt = false,
   glowColor = DEFAULT_GLOW_COLOR,
   clickEffect = true,
-  enableMagnetism = true
+  enableMagnetism = true,
+  skills
 }) => {
   const gridRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobileDetection();
