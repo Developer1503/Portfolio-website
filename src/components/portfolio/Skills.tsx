@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Zap, Code2, Database, Wrench, Sparkles } from "lucide-react";
 import MagicBento from "@/components/ui/MagicBento"; // Technical Skills
 import PixelBlast from "@/components/ui/pixle-blast"; // Background for heading
+import AIAssistant from "@/components/ui/AIAssistant"; // AI Assistant
 
 interface Skill {
   name: string;
@@ -146,6 +147,12 @@ const Skills = () => {
             spotlightRadius={300}
             particleCount={12}
             glowColor="132, 0, 255"
+            skills={technicalSkills.slice(0, 6).map(skill => ({
+              name: skill.name,
+              level: skill.level,
+              category: skill.category,
+              description: `${skill.level}% proficiency`
+            }))}
           />
         </div>
 
@@ -276,6 +283,9 @@ const Skills = () => {
           </div>
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant />
 
       <style>{`
         @keyframes progress-bar {

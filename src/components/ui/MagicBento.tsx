@@ -541,6 +541,14 @@ const MagicBento: React.FC<BentoProps> = ({
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
 
+  // Use skills data if provided, otherwise use default cardData
+  const displayData = skills ? skills.map((skill, index) => ({
+    color: '#060010',
+    title: skill.name,
+    description: skill.description || `${skill.level}% proficiency`,
+    label: skill.category.charAt(0).toUpperCase() + skill.category.slice(1)
+  })) : cardData;
+
   return (
     <>
       {enableSpotlight && (
@@ -554,7 +562,7 @@ const MagicBento: React.FC<BentoProps> = ({
       )}
 
       <BentoCardGrid gridRef={gridRef}>
-        {cardData.map((card, index) => {
+        {displayData.map((card, index) => {
           const baseClassName = `card ${textAutoHide ? 'card--text-autohide' : ''} ${
             enableBorderGlow ? 'card--border-glow' : ''
           }`;
