@@ -1,7 +1,7 @@
 import { useEffect, useRef, memo } from 'react';
 import { Code, Brain, Shield, Users, Lightbulb, Activity, HeartPulse } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
-import vedantHeadshot from '@/assets/vedant-headhot.jpg';
+import ProfileCard from "@/components/ui/ProfileCard";
 import PixelBlast from "@/components/ui/pixle-blast";
 
 // Memoized HighlightCard component
@@ -91,15 +91,23 @@ const About = () => {
 
         {/* Grid Layout */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Profile Image */}
+          {/* Profile Card */}
           <div className="fade-on-scroll flex justify-center lg:justify-start">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-primary rounded-2xl blur-2xl opacity-20 scale-110"></div>
-              <img
-                src={vedantHeadshot}
-                alt="Vedant Shinde - AI/ML Student and Developer"
-                className="relative w-80 h-80 object-cover rounded-2xl shadow-strong border-4 border-card hover:scale-105 transition-transform duration-500"
-                loading="lazy"
+            <div className="w-full max-w-md mx-auto lg:mx-0">
+              <ProfileCard
+                avatarUrl="src\assets\Generated Image October 12, 2025 - 2_27PM.png"
+                name="Vedant Shinde"
+                title="AI/ML Student & Developer"
+                contactText="Get in Touch"
+                showUserInfo={true}
+                enableTilt={true}
+                enableMobileTilt={false}
+                mobileTiltSensitivity={3}
+                showBehindGradient={true}
+                onContactClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  contactSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
               />
             </div>
           </div>
