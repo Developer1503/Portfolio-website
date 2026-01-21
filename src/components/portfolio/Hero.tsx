@@ -19,10 +19,10 @@ const Hero: React.FC = () => {
   };
 
   const socialLinks = [
-  { href: "https://github.com/Developer1503", icon: <GitHubIcon />, label: "GitHub" },
-  { href: "https://www.linkedin.com/in/vedant-shinde-119866242/", icon: <LinkedInIcon />, label: "LinkedIn" },
-  { href: "#", icon: <TwitterIcon />, label: "Twitter" }, // Replace # with your Twitter link if available
-];
+    { href: "https://github.com/Developer1503", icon: <GitHubIcon />, label: "GitHub" },
+    { href: "https://www.linkedin.com/in/vedant-shinde-119866242/", icon: <LinkedInIcon />, label: "LinkedIn" },
+    { href: "#", icon: <TwitterIcon />, label: "Twitter" }, // Replace # with your Twitter link if available
+  ];
 
 
   return (
@@ -47,9 +47,8 @@ const Hero: React.FC = () => {
           </div>
         ) : (
           <div
-            className={`w-full h-full transition-opacity duration-700 ${
-              isSplineLoaded ? "opacity-100" : "opacity-0"
-            }`}
+            className={`w-full h-full transition-opacity duration-700 ${isSplineLoaded ? "opacity-100" : "opacity-0"
+              }`}
           >
             <Spline
               scene="https://prod.spline.design/CNJqjxyqbjfoh5dQ/scene.splinecode"
@@ -132,7 +131,12 @@ const Hero: React.FC = () => {
               >
                 View My Work
               </button>
-              <button className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 roboto-medium">
+              <a
+                href="https://www.linkedin.com/in/vedant-shinde-119866242/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 border border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2 roboto-medium"
+              >
                 Get In Touch
                 <svg
                   className="w-4 h-4"
@@ -147,7 +151,7 @@ const Hero: React.FC = () => {
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </button>
+              </a>
             </div>
 
             <div className="flex md:hidden flex-col gap-3 px-4">
@@ -170,7 +174,12 @@ const Hero: React.FC = () => {
                 </svg>
                 View My Work
               </button>
-              <button className="w-full py-4 border-2 border-indigo-400/60 text-indigo-400 rounded-xl font-semibold backdrop-blur-sm active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
+              <a
+                href="https://www.linkedin.com/in/vedant-shinde-119866242/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 border-2 border-indigo-400/60 text-indigo-400 rounded-xl font-semibold backdrop-blur-sm active:scale-95 transition-all duration-200 flex items-center justify-center gap-2"
+              >
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -185,7 +194,7 @@ const Hero: React.FC = () => {
                   />
                 </svg>
                 Get In Touch
-              </button>
+              </a>
             </div>
           </div>
 

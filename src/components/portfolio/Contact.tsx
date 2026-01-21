@@ -34,7 +34,7 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: <Github className="h-5 w-5" />, label: 'GitHub', url: 'https://github.com/Developer1503', color: 'hover:text-foreground' },
-    { icon: <Linkedin className="h-5 w-5" />, label: 'LinkedIn', url: '#', color: 'hover:text-blue-600' },
+    { icon: <Linkedin className="h-5 w-5" />, label: 'LinkedIn', url: 'https://www.linkedin.com/in/vedant-shinde-119866242/', color: 'hover:text-blue-600' },
     { icon: <Mail className="h-5 w-5" />, label: 'Email', url: 'mailto:vedant.shinde@example.com', color: 'hover:text-red-600' }
   ];
 
