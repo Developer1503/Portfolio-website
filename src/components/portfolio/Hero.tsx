@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
 import Prism from "../ui/prism";
 import RotatingText from "../ui/rotating-text";
@@ -7,6 +8,7 @@ import RotatingText from "../ui/rotating-text";
 const Hero: React.FC = () => {
   const [isSplineLoaded, setIsSplineLoaded] = useState(false);
   const [splineError, setSplineError] = useState(false);
+  const navigate = useNavigate();
 
   const handleSplineLoad = () => setIsSplineLoaded(true);
   const handleSplineError = () => setSplineError(true);
@@ -16,6 +18,10 @@ const Hero: React.FC = () => {
       top: window.innerHeight,
       behavior: "smooth",
     });
+  };
+
+  const handleViewMyWork = () => {
+    navigate("/my-work");
   };
 
   const socialLinks = [
@@ -127,7 +133,7 @@ const Hero: React.FC = () => {
             <div className="hidden md:flex md:flex-row md:gap-4">
               <button
                 className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-indigo-500/25 roboto-medium"
-                onClick={scrollToNextSection}
+                onClick={handleViewMyWork}
               >
                 View My Work
               </button>
@@ -157,7 +163,7 @@ const Hero: React.FC = () => {
             <div className="flex md:hidden flex-col gap-3 px-4">
               <button
                 className="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-white shadow-lg active:scale-95 transition-all duration-200 flex items-center justify-center gap-2"
-                onClick={scrollToNextSection}
+                onClick={handleViewMyWork}
               >
                 <svg
                   className="w-5 h-5"
