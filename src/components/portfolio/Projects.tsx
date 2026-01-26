@@ -51,15 +51,15 @@ const Projects = () => {
       category: 'ml'
     },
     {
-      id: 'insight-copilot',
-      title: "InsightCopilot",
-      description: "AI-powered document analysis app with React + Tailwind",
-      longDescription: "Intelligent document processing application that leverages AI to analyze, summarize, and extract insights from various document formats with a modern, responsive interface.",
+      id: 'pdf-research-assistant',
+      title: "PDF Research Assistant v2.0",
+      description: "Enterprise AI-powered PDF analysis with multi-agent CrewAI framework",
+      longDescription: "Advanced PDF research tool featuring AI querying, persistent indexed storage, citation verification, multi-document workspace, voice input support, and export to Markdown/JSON/HTML formats. Built with CrewAI multi-agent architecture and Streamlit UI.",
       image: insightCopilotImage,
       icon: <FileText className="h-6 w-6" />,
-      technologies: ['React', 'Tailwind CSS', 'TypeScript', 'Node.js', 'AI APIs'],
-      demoUrl: '#',
-      githubUrl: 'https://github.com/Developer1503',
+      technologies: ['Python', 'CrewAI', 'Streamlit', 'LangChain', 'PDF Processing', 'AI Agents'],
+      demoUrl: 'https://pdf-crewai-assistant.streamlit.app/',
+      githubUrl: 'https://github.com/Developer1503/PDF-crewai',
       category: 'ai'
     },
     {
@@ -175,7 +175,7 @@ const Projects = () => {
                 <p className="text-muted-foreground mb-4 line-clamp-2">
                   {project.description}
                 </p>
-                
+
                 <p className="text-sm text-foreground mb-4 opacity-75">
                   {project.longDescription}
                 </p>
