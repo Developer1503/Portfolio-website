@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Zap, Sparkles } from "lucide-react";
 import MagicBento from "@/components/ui/MagicBento"; // Technical Skills
@@ -21,31 +21,38 @@ const Skills = () => {
 
 
 
-  const technicalSkills: Skill[] = [
-    { name: "Python", level: 95, category: "programming" },
-    { name: "TypeScript", level: 92, category: "programming" },
+  const aiSkills: Skill[] = [
+    { name: "LangChain", level: 95, category: "frameworks" },
+    { name: "CrewAI", level: 92, category: "frameworks" },
+    { name: "Embeddings", level: 90, category: "frameworks" },
+    { name: "Scikit-learn", level: 92, category: "frameworks" },
+    { name: "TensorFlow", level: 90, category: "frameworks" },
+    { name: "PyTorch", level: 88, category: "frameworks" },
+  ];
+
+  const devSkills: Skill[] = [
+    { name: "Python", level: 98, category: "programming" },
+    { name: "TypeScript", level: 88, category: "programming" },
     { name: "JavaScript", level: 90, category: "programming" },
+    { name: "FastAPI", level: 92, category: "frameworks" },
+    { name: "React", level: 88, category: "frameworks" },
+    { name: "HTML/CSS", level: 95, category: "frameworks" },
+    { name: "Flask", level: 90, category: "frameworks" },
     { name: "Java", level: 85, category: "programming" },
-    { name: "Go", level: 78, category: "programming" },
-    { name: "Rust", level: 72, category: "programming" },
-    { name: "React", level: 94, category: "frameworks" },
-    { name: "Next.js", level: 90, category: "frameworks" },
-    { name: "Node.js", level: 88, category: "frameworks" },
-    { name: "Express", level: 85, category: "frameworks" },
-    { name: "TensorFlow", level: 87, category: "frameworks" },
-    { name: "PyTorch", level: 83, category: "frameworks" },
-    { name: "Scikit-learn", level: 90, category: "frameworks" },
-    { name: "FastAPI", level: 86, category: "frameworks" },
-    { name: "PostgreSQL", level: 88, category: "databases" },
-    { name: "MongoDB", level: 87, category: "databases" },
-    { name: "Redis", level: 82, category: "databases" },
-    { name: "MySQL", level: 85, category: "databases" },
-    { name: "Git", level: 95, category: "tools" },
+    { name: "C", level: 75, category: "programming" },
+    { name: "REST APIs", level: 92, category: "frameworks" },
+  ];
+
+  const dataSkills: Skill[] = [
+    { name: "SQL", level: 95, category: "programming" },
+    { name: "Pandas", level: 95, category: "tools" },
+    { name: "MongoDB", level: 90, category: "databases" },
+    { name: "Vector DBs", level: 88, category: "databases" },
+    { name: "AWS", level: 85, category: "tools" },
     { name: "Docker", level: 88, category: "tools" },
-    { name: "Kubernetes", level: 75, category: "tools" },
-    { name: "AWS", level: 82, category: "tools" },
-    { name: "Vercel", level: 90, category: "tools" },
-    { name: "Terraform", level: 70, category: "tools" },
+    { name: "Power BI", level: 88, category: "tools" },
+    { name: "R", level: 80, category: "programming" },
+    { name: "NumPy", level: 94, category: "tools" },
   ];
 
 
@@ -97,36 +104,79 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Technical Skills with MagicBento */}
-        <div className="fade-on-scroll mb-20">
-          <div className="text-center mb-12">
+        {/* Categorized Skills Display */}
+        <div className="fade-on-scroll mb-16">
+          {/* Section 1: AI & Innovation (Highlighted) */}
+          <div className="text-center mb-10">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Technical Arsenal
+              AI & Agentic Systems
             </h3>
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
               <Zap className="w-5 h-5 text-yellow-400" />
-              <span>Cutting-edge technologies & frameworks</span>
+              <span>Core Specialization & Advanced Intelligence</span>
               <Zap className="w-5 h-5 text-yellow-400" />
             </div>
           </div>
-          <MagicBento
-            textAutoHide={true}
-            enableStars={true}
-            enableSpotlight={true}
-            enableBorderGlow={true}
-            enableTilt={true}
-            enableMagnetism={true}
-            clickEffect={true}
-            spotlightRadius={300}
-            particleCount={12}
-            glowColor="132, 0, 255"
-            skills={technicalSkills.slice(0, 6).map(skill => ({
-              name: skill.name,
-              level: skill.level,
-              category: skill.category,
-              description: `${skill.level}% proficiency`
-            }))}
-          />
+
+          <div className="mb-16">
+            <MagicBento
+              textAutoHide={true}
+              enableStars={true}
+              enableSpotlight={true}
+              enableBorderGlow={true}
+              enableTilt={true}
+              enableMagnetism={true}
+              clickEffect={true}
+              spotlightRadius={300}
+              particleCount={12}
+              glowColor="132, 0, 255"
+              skills={aiSkills.map(skill => ({
+                name: skill.name,
+                level: skill.level,
+                category: skill.category,
+                description: `${skill.level}% proficiency`
+              }))}
+            />
+          </div>
+
+          {/* Section 2: Development & Data Grid */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Development Stack */}
+            <Card className="bg-background/30 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-colors">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-xl">
+                  <Sparkles className="w-5 h-5 text-blue-400" />
+                  Development Ecosystem
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {devSkills.map(s => (
+                  <Badge key={s.name} variant="secondary" className="text-sm py-1.5 px-3 hover:bg-primary/20 transition-colors cursor-default">
+                    {s.name}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Data & Infrastructure */}
+            <Card className="bg-background/30 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-colors">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-xl">
+                  <Badge className="w-5 h-5 bg-transparent p-0 flex items-center justify-center shadow-none text-green-400">
+                    <span className="text-lg">⚡</span>
+                  </Badge>
+                  Data & Infrastructure
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {dataSkills.map(s => (
+                  <Badge key={s.name} variant="secondary" className="text-sm py-1.5 px-3 hover:bg-primary/20 transition-colors cursor-default">
+                    {s.name}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center my-20 w-full px-4 md:px-0">
