@@ -3,7 +3,6 @@ import { ExternalLink, Github, Brain, TrendingUp, Heart, FileText, ShoppingCart,
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Colorbends from "@/components/ui/Colorbends";
 
 // Import project images
 import parkinsonImage from '@/assets/parkinson-project.jpg';
@@ -137,9 +136,8 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 bg-muted/30 relative overflow-hidden">
-      <Colorbends />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="projects" ref={sectionRef} className="py-20 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="fade-on-scroll text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Featured <span className="bg-gradient-primary bg-clip-text text-transparent">Projects</span>

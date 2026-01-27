@@ -154,7 +154,7 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" ref={sectionRef} className="py-20">
+    <section id="experience" ref={sectionRef} className="py-20 relative z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="fade-on-scroll text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
