@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import ResumePDF from '@/assets/Vedant14.pdf'; // import your resume
+import DotGrid from '@/components/ui/DotGrid';
 
 interface ContactForm {
   name: string;
@@ -82,8 +83,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" ref={sectionRef} className="py-20 relative overflow-hidden bg-muted/30">
+      <div className="absolute inset-0">
+        <DotGrid dotColor="rgba(100, 100, 100, 0.2)" dotColorHover="rgba(120, 80, 200, 0.8)" />
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="fade-on-scroll text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Let's <span className="bg-gradient-primary bg-clip-text text-transparent">Connect</span>
@@ -142,7 +146,7 @@ const Contact = () => {
             </div>
 
             {/* Resume Download + View */}
-            <Card className="project-card border-0 bg-gradient-card">
+            <Card className="project-card border-0 bg-gradient-card backdrop-blur-sm">
               <CardContent className="p-6">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
@@ -177,7 +181,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="fade-on-scroll">
-            <Card className="project-card border-0 bg-gradient-card">
+            <Card className="project-card border-0 bg-gradient-card backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-2xl">Send Me a Message</CardTitle>
               </CardHeader>
