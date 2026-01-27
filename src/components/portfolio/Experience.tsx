@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Calendar, MapPin, Trophy, GraduationCap, Code, Shield } from 'lucide-react';
+import { Calendar, MapPin, Trophy, GraduationCap, Code, Shield, Briefcase } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -9,7 +9,7 @@ interface TimelineItem {
   organization: string;
   location?: string;
   period: string;
-  type: 'education' | 'hackathon' | 'certification' | 'project';
+  type: 'education' | 'hackathon' | 'certification' | 'project' | 'work';
   description: string[];
   technologies?: string[];
   achievements?: string[];
@@ -23,7 +23,7 @@ const Experience = () => {
     {
       id: 'btech-aiml',
       title: 'BTech in Artificial Intelligence & Machine Learning',
-      organization: 'University Name',
+      organization: 'DY Patil University',
       location: 'India',
       period: '2022 - 2026',
       type: 'education',
@@ -35,6 +35,21 @@ const Experience = () => {
       technologies: ['Python', 'TensorFlow', 'PyTorch', 'OpenCV', 'Scikit-learn'],
       achievements: ['Academic Excellence Award', 'Dean\'s List 2023-24'],
       icon: <GraduationCap className="h-5 w-5" />
+    },
+    {
+      id: 'bluestar-intern',
+      title: 'Data Analyst Intern',
+      organization: 'Bluestar Pvt Ltd',
+      location: 'Wada',
+      period: '2026',
+      type: 'work',
+      description: [
+        'Analyzing operational data to identify trends and optimize performance',
+        'Creating comprehensive dashboards for data visualization and reporting',
+        'Collaborating with cross-functional teams to drive data-driven decision making'
+      ],
+      technologies: ['Python', 'SQL', 'Excel', 'Power BI', 'Data Analytics'],
+      icon: <Briefcase className="h-5 w-5" />
     },
     {
       id: 'canara-hackathon',
@@ -122,6 +137,7 @@ const Experience = () => {
       case 'hackathon': return 'bg-accent text-accent-foreground';
       case 'certification': return 'bg-secondary text-secondary-foreground';
       case 'project': return 'bg-muted text-muted-foreground';
+      case 'work': return 'bg-blue-500 text-white';
       default: return 'bg-muted text-muted-foreground';
     }
   };
@@ -132,6 +148,7 @@ const Experience = () => {
       case 'hackathon': return 'Hackathon';
       case 'certification': return 'Certification';
       case 'project': return 'Project';
+      case 'work': return 'Work Experience';
       default: return 'Other';
     }
   };
@@ -156,9 +173,8 @@ const Experience = () => {
             {timelineItems.map((item, index) => (
               <div
                 key={item.id}
-                className={`fade-on-scroll relative flex items-start ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
+                className={`fade-on-scroll relative flex items-start ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}
               >
                 {/* Timeline dot */}
                 <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-medium z-10"></div>
@@ -176,7 +192,7 @@ const Experience = () => {
                           {item.period}
                         </div>
                       </div>
-                      
+
                       <CardTitle className="flex items-center gap-3">
                         <div className="p-2 rounded-lg bg-primary/10 text-primary">
                           {item.icon}
