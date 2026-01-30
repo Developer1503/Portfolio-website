@@ -75,13 +75,14 @@ const Projects = () => {
       category: 'web'
     },
     {
-      id: 'video-summarization',
-      title: "Video Summarization Tool",
-      description: "Python-based application for automatic video content summaries",
-      longDescription: "Advanced video processing tool that automatically generates concise summaries of video content using natural language processing and computer vision techniques.",
+      id: 'ai-feedback-system',
+      title: "Two-Dashboard AI Feedback System",
+      description: "Dual-interface feedback management system with AI-powered analytics",
+      longDescription: "Comprehensive feedback management platform featuring separate user and admin dashboards with AI-driven sentiment analysis, real-time insights, and automated response suggestions for enhanced customer engagement.",
       image: videoSummarizationImage,
       icon: <Video className="h-6 w-6" />,
-      technologies: ['Python', 'OpenCV', 'NLP', 'FFmpeg', 'Transformers'],
+      technologies: ['Python', 'Streamlit', 'AI Analytics', 'Sentiment Analysis', 'Dashboard UI'],
+      demoUrl: 'https://two-dashboard-ai-feedback-system.streamlit.app/',
       githubUrl: 'https://github.com/Developer1503',
       category: 'ai'
     },
