@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Header from '@/components/portfolio/Header';
+import StaggeredMenu from '@/components/ui/StaggeredMenu';
 import Hero from '@/components/portfolio/Hero';
 import About from '@/components/portfolio/About';
 import Skills from '@/components/portfolio/Skills';
@@ -59,7 +59,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-inter overflow-x-hidden">
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <StaggeredMenu darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
       <main>
         <Hero />
