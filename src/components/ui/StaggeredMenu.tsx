@@ -165,8 +165,10 @@ export const StaggeredMenu = ({ darkMode, toggleDarkMode }: StaggeredMenuProps) 
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`absolute top-4 right-4 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-xl pointer-events-auto transition-colors duration-300 ${
-          isOpen ? "bg-white dark:bg-gray-800 text-black dark:text-white" : "bg-black text-white dark:bg-white dark:text-black"
+        className={`absolute top-4 right-4 z-50 flex items-center justify-center w-14 h-14 rounded-full border border-white/20 backdrop-blur-md shadow-xl pointer-events-auto transition-all duration-300 ${
+          isOpen 
+            ? "bg-white/20 dark:bg-gray-800/40 text-black dark:text-white" 
+            : "bg-black/10 dark:bg-white/10 text-black dark:text-white"
         }`}
       >
         <AnimatePresence mode="wait">
@@ -194,13 +196,15 @@ export const StaggeredMenu = ({ darkMode, toggleDarkMode }: StaggeredMenuProps) 
         </AnimatePresence>
       </button>
 
-      {/* Logo */}
-      <div className="fixed top-6 left-4 sm:left-8 z-40 pointer-events-auto">
+      {/* Logo Container with Glassmorphism */}
+      <div className="fixed top-4 left-4 sm:left-6 z-40 pointer-events-auto">
          <button
             onClick={() => scrollToSection('home')}
-            className="text-3xl font-black bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent hover:scale-105 transition-transform"
+            className="px-5 py-2.5 rounded-2xl border border-white/20 backdrop-blur-md bg-white/10 dark:bg-black/10 shadow-lg flex items-center justify-center group hover:scale-105 hover:bg-white/20 transition-all duration-300"
           >
-            VS.
+            <span className="text-2xl font-black bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-cyan-400 transition-all">
+              VS.
+            </span>
           </button>
       </div>
     </motion.nav>

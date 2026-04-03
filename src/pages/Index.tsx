@@ -7,7 +7,6 @@ import Projects from '@/components/portfolio/Projects';
 import Experience from '@/components/portfolio/Experience';
 import Contact from '@/components/portfolio/Contact';
 import Footer from '@/components/portfolio/Footer';
-import Colorbends from '@/components/ui/Colorbends';
 
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -65,8 +64,7 @@ const Index = () => {
         <Hero />
         <About />
         <Skills />
-        <div className="relative overflow-hidden bg-muted/30">
-          <Colorbends />
+        <div className="relative bg-muted/30">
           <Projects />
           <Experience />
         </div>

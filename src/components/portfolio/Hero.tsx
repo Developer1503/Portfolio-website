@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Spline from "@splinetool/react-spline";
-import Prism from "../ui/prism";
+
+import Colorbends from "../ui/Colorbends";
 import RotatingText from "../ui/rotating-text";
 
 const Hero: React.FC = () => {
@@ -33,37 +33,26 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black text-white">
-      {/* Background Prism Overlay */}
-      <div className="absolute inset-0 z-10 w-full h-full pointer-events-none">
-        <div className="w-full h-full filter brightness-125 sm:brightness-100">
-          <Prism />
+      {/* Background Colorbends Overlay */}
+      <div className="absolute inset-0 z-0 w-full h-full">
+        <div className="w-full h-full pointer-events-none">
+          <Colorbends
+            colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+            rotation={0}
+            speed={0.2}
+            scale={1}
+            frequency={1}
+            warpStrength={1}
+            mouseInfluence={0}
+            parallax={0}
+            noise={0.1}
+            transparent
+            autoRotate={0}
+          />
         </div>
       </div>
 
-      {/* Fullscreen Centered Bot */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
-        {!isSplineLoaded && !splineError && (
-          <div className="absolute inset-0 flex items-center justify-center z-10">
-            <div className="w-8 h-8 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-        {splineError ? (
-          <div className="text-red-500">
-            Failed to load 3D model. Please refresh the page.
-          </div>
-        ) : (
-          <div
-            className={`w-full h-full transition-opacity duration-700 ${isSplineLoaded ? "opacity-100" : "opacity-0"
-              }`}
-          >
-            <Spline
-              scene="https://prod.spline.design/CNJqjxyqbjfoh5dQ/scene.splinecode"
-              onLoad={handleSplineLoad}
-              onError={handleSplineError}
-            />
-          </div>
-        )}
-      </div>
+      {/* Spline Model turned off for now */}
 
       {/* Foreground Content */}
       <div className="relative z-20 container mx-auto px-6 md:px-12 text-left">
@@ -204,48 +193,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Stats - Left-aligned */}
-          <div className="hidden md:flex md:justify-start md:space-x-10 mt-10 text-gray-400">
-            <div className="text-center cursor-pointer group">
-              <div className="text-2xl md:text-3xl font-bold text-indigo-400 group-hover:text-indigo-300 transition-colors roboto-medium">
-                50+
-              </div>
-              <div className="text-sm font-medium roboto-regular">Projects</div>
-            </div>
-            <div className="text-center cursor-pointer group">
-              <div className="text-2xl md:text-3xl font-bold text-indigo-400 group-hover:text-indigo-300 transition-colors roboto-medium">
-                3+
-              </div>
-              <div className="text-sm font-medium roboto-regular">Years Exp</div>
-            </div>
-            <div className="text-center cursor-pointer group">
-              <div className="text-2xl md:text-3xl font-bold text-indigo-400 group-hover:text-indigo-300 transition-colors roboto-medium">
-                ∞
-              </div>
-              <div className="text-sm font-medium roboto-regular">Ideas</div>
-            </div>
-          </div>
 
-          {/* Mobile Stats */}
-          <div className="md:hidden mx-4 mt-8">
-            <div className="bg-gray-800/20 backdrop-blur-sm border border-gray-700/30 rounded-2xl p-6">
-              <div className="flex justify-start gap-6">
-                {[
-                  { number: "50+", label: "Projects", icon: "📂" },
-                  { number: "3+", label: "Years", icon: "⏳" },
-                  { number: "∞", label: "Ideas", icon: "💡" },
-                ].map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-2xl mb-2">{stat.icon}</div>
-                    <div className="text-2xl font-bold text-indigo-400 mb-1">
-                      {stat.number}
-                    </div>
-                    <div className="text-xs text-gray-400 font-medium">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
 
           {/* Desktop Social Links - Left-aligned */}
           <div className="hidden md:flex md:justify-start md:space-x-5 mt-8">
