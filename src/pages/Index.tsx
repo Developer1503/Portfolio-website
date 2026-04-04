@@ -3,7 +3,7 @@ import StaggeredMenu from '@/components/ui/StaggeredMenu';
 import Hero from '@/components/portfolio/Hero';
 import About from '@/components/portfolio/About';
 import Skills from '@/components/portfolio/Skills';
-import Projects from '@/components/portfolio/Projects';
+import ProjectGallery from '@/components/portfolio/ProjectGallery';
 import Experience from '@/components/portfolio/Experience';
 import Contact from '@/components/portfolio/Contact';
 import Footer from '@/components/portfolio/Footer';
@@ -64,8 +64,8 @@ const Index = () => {
         <Hero />
         <About />
         <Skills />
-        <div className="relative bg-muted/30">
-          <Projects />
+        <div className="relative">
+          <ProjectGallery />
           <Experience />
         </div>
         <Contact />

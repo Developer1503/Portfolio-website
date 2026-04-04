@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&family=Space+Grotesk:wght@400;700&display=swap');
+
+:root {
+  --section-blue: #2233ff;
+  --card-black: #0a0a0a;
+  /* The rod sits at 85px to compensate for the 40px top padding of the viewport */
+  --rod-top: 85px;
+  --rod-height: 14px;
+}
+
+/* =============================================
+   SECTION
+   ============================================= */
+.project-gallery-section {
+  background: radial-gradient(circle at 30% 20%, #60a5fa, #1e3a8a, #0f172a);
+  padding: 80px 0 0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.gallery-header {
+  padding: 0 60px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.gallery-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: #000;
+  margin: 0;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.gallery-header-desc {
+  max-width: 360px;
+  font-size: 0.95rem;
+  color: rgba(0,0,0,0.75);
+  line-height: 1.6;
+  padding-top: 8px;
+}
+
+/* =============================================
+   ROD WRAPPER — contains rod + scrollable cards
+   ============================================= */
+.gallery-rod-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* ── THE REALISTIC METAL ROD ── z-index 4 → BELOW cards (z-index 10) */
+.gallery-rod {
+  position: absolute;
+  top: var(--rod-top);   /* exactly centered on tag holes  */
+  left: 0;
+  right: 0;
+  height: var(--rod-height);
+  background: linear-gradient(
+    to bottom,
+    #c0c0c0 0%,
+    #808080 35%,
+    #303030 60%,
+    #a0a0a0 100%
+  );
+  z-index: 4;
+  border-radius: 8px;
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* Sharp highlight line on rod */
+.gallery-rod::after {
+  content: "";
+  position: absolute;
+  top: 1.5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.45);
+  border-radius: 8px;
+}
+
+/* =============================================
+   DRAGGABLE VIEWPORT
+   ============================================= */
+.gallery-cards-viewport {
+  display: flex;
+  gap: 40px; /* Increased gap so they're equally spaced */
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  position: relative;
+  z-index: 10;    /* ABOVE the rod */
+  padding: 40px 60px 100px; /* Added padding to give breathing room around cards */
+}
+
+.gallery-cards-viewport::-webkit-scrollbar { display: none; }
+.gallery-cards-viewport.active { cursor: grabbing; }
+
+/* =============================================
+   SINGLE TICKET UNIT
+   ============================================= */
+.ticket-unit {
+  flex-shrink: 0;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* Slight hanging rotation — unique per index, set in TSX via style prop */
+}
+
+/* =============================================
+   TOP TAG — the colored square that clips onto the rod
+   ============================================= */
+.ticket-tag {
+  width: 110px;
+  border-radius: 14px;
+  padding: 10px 14px 14px;
+  position: absolute;   /* Sits completely on the main card */
+  top: 0px;
+  left: 44px;
+  z-index: 12;          /* ABOVE rod AND above card mask */
+  margin: 0;
+  flex-shrink: 0;
+  /* Compression shadow ON the rod */
+  box-shadow:
+    0 6px 0 rgba(0,0,0,0.5),   
+    0 12px 20px rgba(0,0,0,0.3);
+}
+
+.tag-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(0,0,0,0.85);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tag-hole-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── HOLE ── must align exactly with rod center */
+.tag-hole {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1a30c8;
+  border: 3px solid rgba(0,0,0,0.6);
+  flex-shrink: 0;
+  box-shadow:
+    inset 0 4px 6px rgba(0,0,0,0.9),       /* deep top shadow */
+    inset 0 -2px 3px rgba(255,255,255,0.3), /* bottom light rim */
+    0 2px 4px rgba(0,0,0,0.5);              /* slight outer shadow */
+}
+
+.tag-date {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.6);
+  letter-spacing: 0.05em;
+}
+
+/* =============================================
+   THE CARD
+   ============================================= */
+.ticket-card {
+  background-color: var(--card-black);
+  border-radius: 28px;
+  overflow: visible;        /* allow ::before to be positioned relative to card */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  box-shadow:
+    0 25px 50px rgba(0,0,0,0.5),
+    0 10px 20px rgba(0,0,0,0.3);
+
+  border: 1px solid rgba(255,255,255,0.05);
+  height: 600px;
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+              box-shadow 0.45s ease;
+}
+
+/*
+  ── ROD MASK STRIP ──
+  Hides the rod exactly where it would cross the solid black card.
+  Same colour as the card top, sits at the same Y position as the rod,
+  above the rod (z-index 6) but below the hole (z-index 12).
+*/
+.ticket-card::before {
+  content: "";
+  position: absolute;
+  top: -1px;                          /* full overlap, rod is completely hidden */
+  left: 0;
+  width: 100%;
+  height: calc(var(--rod-top) + var(--rod-height) + 4px);
+  background: var(--card-black);      /* matches card top */
+  border-radius: 28px 28px 0 0;
+  z-index: 6;                         /* above rod (4), below hole (12) */
+  pointer-events: none;
+}
+
+/*
+  ── CONTACT SHADOW ──
+  Simulates shadow that the rod would cast on the card surface.
+*/
+.ticket-card::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--rod-top) + var(--rod-height));
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Hover: lifts card + swing */
+.ticket-unit:hover .ticket-card {
+  transform: translateY(-12px) rotate(1deg) scale(1.03) !important;
+  box-shadow:
+    0 35px 70px rgba(0,0,0,0.65),
+    0 15px 30px rgba(0,0,0,0.5);
+}
+
+.ticket-unit:hover .ticket-tag {
+  transform: translateY(-6px);
+}
+
+/* ── BLACK SECTION: giant colored title ── */
+.card-top-black {
+  background-color: var(--card-black);
+  padding: 36px 40px 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px 28px 0 0;
+  z-index: 7;           /* Stays above the rod mask */
+  min-height: 340px;
+}
+
+.card-huge-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9.5rem;
+  line-height: 0.75;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.pill-id-tag {
+  position: absolute;
+  top: 30px;
+  right: 36px;
+  background-color: rgba(255,255,255,0.08);
+  padding: 5px 18px;
+  border-radius: 100px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ── COLORED BOTTOM ZONE ── */
+.card-bottom-colored {
+  padding: 30px 0 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 205px;
+  border-radius: 0 0 28px 28px;
+  z-index: 7;
+}
+
+.card-service-header {
+  padding: 0 36px;
+}
+
+.card-service-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: rgba(0,0,0,0.45);
+  margin-bottom: 6px;
+}
+
+.card-service-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.card-timeline-container {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-labels-top {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px;
+  margin-bottom: 2px;
+}
+
+.timeline-item-top {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.timeline-line {
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  position: relative;
+}
+
+.timeline-triangle-up {
+  position: absolute;
+  top: -4px;
+  width: 0; 
+  height: 0; 
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 4px solid #000;
+  border-bottom: none;
+  transform: translateX(-50%);
+}
+
+.timeline-triangle-down {
+  position: absolute;
+  bottom: -4px;
+  width: 0; 
+  height: 0; 
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 4px solid #000;
+  border-top: none;
+  transform: translateX(-50%);
+}
+
+.timeline-labels-bottom {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px;
+  margin-top: 2px;
+}
+
+.timeline-item-bottom {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #000;
+  opacity: 0.8;
+}
+
+.dashed-divider-horizontal {
+  width: 100%;
+  border-top: 1px dashed rgba(0,0,0,0.4);
+  margin-top: 25px;
+}
+
+.card-bottom-huge-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 4.8rem;
+  line-height: 1;
+  text-align: center;
+  color: #000;
+  opacity: 0.8;
+  letter-spacing: -0.04em;
+  padding: 15px 0 20px;
+  width: 100%;
+}
+
+/* =============================================
+   COLOR MAP
+   ============================================= */
+/* Tags */
+.tag-color-web { background-color: #ff3333; }
+.tag-color-dev { background-color: #ffdd00; }
+.tag-color-ml  { background-color: #a8ff3e; }
+.tag-color-str { background-color: #b4ff6a; }
+
+/* Bottom zones (muted, desaturated) */
+.bottom-web { background: linear-gradient(to bottom, #a03060, #883050); }
+.bottom-dev { background: linear-gradient(to bottom, #8a8068, #7a7058); }
+.bottom-ml  { background: linear-gradient(to bottom, #6a8060, #5a7050); }
+.bottom-str { background: linear-gradient(to bottom, #608070, #507060); }
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  .gallery-header { flex-direction: column; padding: 0 30px 40px; }
+  .ticket-unit { width: 300px; }
+  .card-huge-title { font-size: 7rem; }
+  .ticket-unit:first-child { padding-left: 24px; }
+}
