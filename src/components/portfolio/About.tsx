@@ -1,210 +1,184 @@
-import { useEffect, useRef, memo } from 'react';
-import { Code, Brain, Shield, Users, Lightbulb, Activity, HeartPulse } from 'lucide-react';
-import { Card, CardContent } from "@/components/ui/card";
-import ProfileCard from "@/components/ui/ProfileCard";
-import PixelBlast from "@/components/ui/pixle-blast";
-
-// Memoized HighlightCard component
-const HighlightCard = memo(({ icon, title, description }: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) => (
-  <Card className="project-card border-0 bg-gradient-card">
-    <CardContent className="p-6 text-center">
-      <div className="flex justify-center mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-3 text-foreground">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed">{description}</p>
-    </CardContent>
-  </Card>
-));
-
-HighlightCard.displayName = 'HighlightCard';
+import { useEffect, useRef, useState } from 'react';
+import { User } from 'lucide-react';
+import './About.css';
 
 const About = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [tiltStyle, setTiltStyle] = useState<{ transform: string; transition: string }>({ 
+    transform: 'perspective(1500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)', 
+    transition: 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)' 
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
+            setIsVisible(true);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
-    const elements = sectionRef.current?.querySelectorAll('.fade-on-scroll');
-    elements?.forEach((el) => observer.observe(el));
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     return () => observer.disconnect();
   }, []);
 
-  const highlights = [
-    {
-      icon: <Brain className="h-8 w-8 text-primary" aria-label="AI & Machine Learning" />,
-      title: "AI & Machine Learning",
-      description: "Developing intelligent systems and ML models for real-world applications",
-    },
-    {
-      icon: <Code className="h-8 w-8 text-accent" aria-label="Full-Stack Development" />,
-      title: "Full-Stack Development",
-      description: "Building scalable web applications with modern technologies",
-    },
-    {
-      icon: <Shield className="h-8 w-8 text-secondary" aria-label="Cybersecurity Awareness" />,
-      title: "Cybersecurity Awareness",
-      description: "Building secure applications and understanding digital privacy",
-    },
-    {
-      icon: <Users className="h-8 w-8 text-primary" aria-label="Team Collaboration" />,
-      title: "Team Collaboration",
-      description: "Strong communication and experience in collaborative environments",
-    },
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2; // Center is 0
+    const y = e.clientY - rect.top - rect.height / 2; // Center is 0
+    
+    // The physics: hover the part makes it heavy -> it pushes 'backward'
+    // So if x > 0 (right side), right side pushes back (rotateY negative)
+    // If y > 0 (bottom side), bottom side pushes back (rotateX positive)
+    const rotateX = (y / (rect.height / 2)) * 6; // max 6 degrees
+    const rotateY = -(x / (rect.width / 2)) * 6; // max 6 degrees
+
+    setTiltStyle({
+      transform: `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(0.98, 0.98, 0.98)`,
+      transition: 'transform 0.1s ease-out'
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTiltStyle({
+      transform: 'perspective(1500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+      transition: 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)'
+    });
+  };
+
+  const tags = [
+    'Machine Learning',
+    'Deep Learning',
+    'Full-Stack Dev',
+    'Computer Vision',
+    'NLP',
+    'AI in Healthcare',
+    'React / Next.js',
+    'Python',
+    'Data Science',
+    'Open Source',
   ];
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="relative py-20 bg-muted/30 overflow-hidden"
-      style={{ fontFamily: "'Inter', sans-serif" }}
-    >
-      {/* Pixel Blast Background */}
-      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-        <PixelBlast />
+    <section id="about" className="about-section" ref={sectionRef}>
+      {/* Background Decor Elements */}
+      <div className="about-bg-grid" />
+      <div className="about-crosshair" style={{ top: '15%', left: '10%' }}>+</div>
+      <div className="about-crosshair" style={{ top: '80%', left: '85%' }}>+</div>
+      <div className="about-crosshair" style={{ top: '25%', left: '85%' }}>+</div>
+      <div className="about-crosshair" style={{ top: '85%', left: '15%' }}>+</div>
+      
+      <div className="about-deco-square" style={{ top: '20%', left: '12%' }} />
+      <div className="about-deco-square" style={{ bottom: '15%', right: '12%' }} />
+      <div className="about-deco-square" style={{ top: '40%', left: '88%' }} />
+
+      <div className="about-deco-line horizontal" style={{ top: '15%' }} />
+      <div className="about-deco-line horizontal" style={{ bottom: '15%' }} />
+      <div className="about-deco-line vertical" style={{ left: '10%' }} />
+      <div className="about-deco-line vertical" style={{ right: '10%' }} />
+
+      <div className="about-deco-circle about-deco-circle--left" />
+      <div className="about-deco-circle about-deco-circle--right" />
+      <div className="about-deco-dot" style={{ top: '25%', right: '12%' }} />
+      <div className="about-deco-dot" style={{ bottom: '20%', left: '8%' }} />
+      <div className="about-deco-dot" style={{ top: '60%', right: '6%' }} />
+
+      {/* Section label above card */}
+      <div className="about-section-heading">
+        <h2>About Me</h2>
+        <div className="heading-line" />
       </div>
 
-      {/* Content Wrapper */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
-        <div className="fade-on-scroll text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            About <span className="bg-gradient-primary bg-clip-text text-transparent">Me</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Turning ideas into intelligent solutions
-          </p>
-        </div>
+      {/* Main card wrapper */}
+      <div className={`about-card-wrapper ${isVisible ? 'visible' : ''}`}>
 
-        {/* Grid Layout */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Profile Card */}
-          <div className="fade-on-scroll flex justify-center lg:justify-start">
-            <div className="w-full max-w-md mx-auto lg:mx-0">
-              <ProfileCard
-                avatarUrl="src\assets\Generated Image October 12, 2025 - 2_27PM.png"
-                name="Vedant Shinde"
-                title="AI/ML Student & Developer"
-                contactText="Get in Touch"
-                showUserInfo={true}
-                enableTilt={true}
-                enableMobileTilt={false}
-                mobileTiltSensitivity={3}
-                showBehindGradient={true}
-                onContactClick={() => {
-                  const contactSection = document.getElementById('contact');
-                  contactSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              />
-            </div>
-          </div>
+        {/* Vertical side text */}
+        <div className="about-side-text">Profile • 2026</div>
 
-          {/* Enhanced Bio Content with Icons and Styling */}
-          <div className="space-y-6 fade-on-scroll">
-            {/* First Paragraph with Hook */}
-            <div className="relative p-4 bg-muted/50 rounded-lg border-l-4 border-gradient-primary">
-              <p className="text-lg leading-[1.8] text-foreground">
-                <span className="font-semibold text-xl">I'm Vedant</span> — a <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-semibold">4th-year BTech student</span> in
-                <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-semibold"> Artificial Intelligence & Machine Learning</span>,
-                passionate about <span className="font-semibold">leveraging technology to solve real-world problems</span>.
-              </p>
-              <div className="flex space-x-2 mt-2">
-                <Brain className="h-5 w-5 text-primary" />
-                <span className="text-sm text-muted-foreground">AI/ML</span>
-                <Code className="h-5 w-5 text-accent" />
-                <span className="text-sm text-muted-foreground">Full-Stack</span>
-                <Shield className="h-5 w-5 text-secondary" />
-                <span className="text-sm text-muted-foreground">Cybersecurity</span>
-              </div>
-            </div>
+        <div 
+          ref={cardRef} 
+          className="about-card"
+          style={tiltStyle}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Corner accent (bottom-left) */}
+          <div className="card-corner-bl" />
 
-            {/* Second Paragraph with Specialization */}
-            <div className="relative p-4 bg-muted/50 rounded-lg border-l-4 border-gradient-secondary">
-              <p className="text-lg leading-[1.8] text-foreground">
-                I specialize in <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-semibold">AI-driven healthcare solutions</span>,
-                building <span className="bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent font-semibold">robust web applications</span>,
-                and creating <span className="font-semibold">intelligent systems</span> with meaningful impact.
-              </p>
-              <div className="flex space-x-2 mt-2">
-                <HeartPulse className="h-5 w-5 text-red-500" />
-                <span className="text-sm text-muted-foreground">Healthcare AI</span>
-                <Activity className="h-5 w-5 text-blue-500" />
-                <span className="text-sm text-muted-foreground">Web Apps</span>
-                <Lightbulb className="h-5 w-5 text-yellow-500" />
-                <span className="text-sm text-muted-foreground">Intelligent Systems</span>
-              </div>
-            </div>
-
-            {/* Third Paragraph with Goals */}
-            <div className="relative p-4 bg-muted/50 rounded-lg border-l-4 border-gradient-accent">
-              <p className="text-lg leading-[1.8] text-foreground">
-                As a <span className="font-semibold">curious problem-solver</span> and
-                <span className="font-semibold"> continuous learner</span>, I thrive in
-                <span className="bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent font-semibold"> collaborative environments</span>
-                and embrace new challenges. My goal is to build <span className="font-semibold">AI-powered products</span> that
-                <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent font-semibold"> enhance human capabilities</span>
-                and create positive societal impact.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Highlights Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {highlights.map((highlight, index) => (
-            <HighlightCard
-              key={index}
-              icon={highlight.icon}
-              title={highlight.title}
-              description={highlight.description}
+          {/* ── Left: Photo (Default Theme Placeholder) ── */}
+          <div className="about-photo-wrapper bg-black/40 flex items-center justify-center border border-white/5 backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
+            <User 
+              size={120} 
+              strokeWidth={1} 
+              className="text-white/20 transition-all duration-700 ease-out z-0 group-hover:scale-110 group-hover:text-white/40" 
             />
-          ))}
+            
+            {/* Subtle tech accents within frame */}
+            <div className="absolute top-4 left-4 w-2 h-2 border-t border-l border-white/30 z-20" />
+            <div className="absolute bottom-4 right-4 w-2 h-2 border-b border-r border-white/30 z-20" />
+          </div>
+
+          {/* ── Right: Content ── */}
+          <div className="about-content">
+            {/* Name + Role */}
+            <div className="about-header">
+              <h2 className="about-name">
+                Vedant<br />Shinde
+              </h2>
+              <span className="about-role-badge">AI/ML Developer</span>
+            </div>
+
+            {/* Stats */}
+            <div className="about-stats">
+              <div className="about-stat">
+                <div className="about-stat-label">Type</div>
+                <div className="about-stat-value">Developer</div>
+              </div>
+              <div className="about-stat">
+                <div className="about-stat-label">Focus</div>
+                <div className="about-stat-value">AI / ML</div>
+              </div>
+              <div className="about-stat">
+                <div className="about-stat-label">Base</div>
+                <div className="about-stat-value">India</div>
+              </div>
+            </div>
+
+            {/* Bio */}
+            <p className="about-bio">
+              4th-year BTech student in Artificial Intelligence & Machine Learning,
+              passionate about building intelligent systems for real-world impact.
+              I specialize in AI-driven healthcare solutions, full-stack web
+              applications, and creating ML-powered products — sometimes all at once.
+              I work with data, models, and code to structure an idea. Sometimes ship it.
+            </p>
+
+            {/* Tags */}
+            <div className="about-tags">
+              {tags.map((tag) => (
+                <span key={tag} className="about-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Footer ── */}
+          <div className="about-card-footer">
+            <span>N°001</span>
+            <span>2026 — IN</span>
+          </div>
         </div>
       </div>
-
-      {/* Animation Styles */}
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease forwards;
-        }
-        .fade-on-scroll {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .border-gradient-primary {
-          border-image: linear-gradient(to bottom, #8b5cf6, #ec4899) 1;
-        }
-        .border-gradient-secondary {
-          border-image: linear-gradient(to bottom, #3b82f6, #06b6d4) 1;
-        }
-        .border-gradient-accent {
-          border-image: linear-gradient(to bottom, #10b981, #059669) 1;
-        }
-      `}</style>
     </section>
   );
 };
