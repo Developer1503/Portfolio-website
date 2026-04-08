@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface StaggeredMenuProps {
@@ -122,44 +122,6 @@ export const StaggeredMenu = ({ darkMode, toggleDarkMode }: StaggeredMenuProps) 
               </button>
             </motion.li>
           ))}
-          
-          <motion.li variants={itemVariants} className="mt-8 border-t border-gray-200 dark:border-gray-800 pt-8">
-            <div className="flex items-center gap-4">
-              <span className="text-xl font-medium text-gray-500 dark:text-gray-400">Theme</span>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  toggleDarkMode();
-                }}
-                className="rounded-full shadow-lg h-12 w-12 border-gray-300 dark:border-gray-700 hover:border-purple-500"
-              >
-                <AnimatePresence mode="wait">
-                  {darkMode ? (
-                    <motion.div
-                      key="sun"
-                      initial={{ scale: 0, rotate: -90 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      exit={{ scale: 0, rotate: 90 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Sun className="h-6 w-6 text-yellow-500" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="moon"
-                      initial={{ scale: 0, rotate: -90 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      exit={{ scale: 0, rotate: 90 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Moon className="h-6 w-6 text-slate-700" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </Button>
-            </div>
-          </motion.li>
         </motion.ul>
       </motion.div>
 

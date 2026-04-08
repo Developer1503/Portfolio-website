@@ -6,6 +6,16 @@ export const CustomCursor = () => {
   const ringRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>();
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Position that mouse is currently at
   const mouse = useRef({ x: 0, y: 0 });
@@ -15,6 +25,8 @@ export const CustomCursor = () => {
   const ring = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouse.current = { x: e.clientX, y: e.clientY };
       if (!isVisible) setIsVisible(true);
@@ -54,10 +66,12 @@ export const CustomCursor = () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [isVisible]);
+  }, [isVisible, isMobile]);
 
   // Click effect
   useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseDown = () => {
       if (ringRef.current) ringRef.current.style.transform += ' scale(0.8)';
     };
@@ -72,7 +86,9 @@ export const CustomCursor = () => {
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <>

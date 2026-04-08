@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 interface HeaderProps {
@@ -71,27 +71,10 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
               {item.label}
             </button>
           ))}
-          {/* Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleDarkMode}
-            className="ml-1 rounded-full hover:bg-gray-800 transition"
-          >
-            {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleDarkMode}
-            className="hover:bg-muted transition"
-          >
-            {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
           <Button
             variant="ghost"
             size="icon"
