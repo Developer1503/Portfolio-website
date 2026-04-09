@@ -184,7 +184,7 @@ const ProjectGallery = () => {
     <section id="project-gallery" className="project-gallery-section">
       {/* Header */}
       <header className="gallery-header">
-        <h2 className="gallery-title">SERVICES</h2>
+        <h2 className="gallery-title">Projects</h2>
         <p className="gallery-header-desc">
           I'm a full-stack creative developer who can take any project from ground zero
           to an award-worthy launch. Browse the catalogue and{' '}
