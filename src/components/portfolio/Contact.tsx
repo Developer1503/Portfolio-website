@@ -72,35 +72,6 @@ function GridBackground() {
   );
 }
 
-// ─── Tuning Knob (small circle on the right like reference) ──────────────────
-interface TuningKnobProps {
-  signalStrength: number;
-}
-
-function TuningKnob({ signalStrength }: TuningKnobProps) {
-  return (
-    <div className="relative w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0">
-      {/* Thin outer ring */}
-      <div
-        className="absolute inset-0 rounded-full"
-        style={{
-          border: '1px solid rgba(255,255,255,0.15)',
-        }}
-      />
-      {/* Center dot */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{
-          width: '3px',
-          height: '3px',
-          background: signalStrength > 0.8 ? 'rgba(200,255,230,0.8)' : 'rgba(255,255,255,0.3)',
-          transition: 'background 0.5s',
-        }}
-      />
-    </div>
-  );
-}
-
 // ─── Frequency Slider ────────────────────────────────────────────────────────
 interface FrequencySliderProps {
   frequency: number;
@@ -108,9 +79,10 @@ interface FrequencySliderProps {
   freqMax: number;
   onFrequencyChange: (f: number) => void;
   signalStrength: number;
+  isLocked?: boolean;
 }
 
-function FrequencySlider({ frequency, freqMin, freqMax, onFrequencyChange, signalStrength }: FrequencySliderProps) {
+function FrequencySlider({ frequency, freqMin, freqMax, onFrequencyChange, signalStrength, isLocked }: FrequencySliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
 
@@ -143,39 +115,81 @@ function FrequencySlider({ frequency, freqMin, freqMax, onFrequencyChange, signa
   const ticks = [88, 92, 96, 100, 104, 108];
 
   return (
-    <div className="flex items-center gap-6 w-full select-none">
+    <div className="flex items-center gap-6 sm:gap-12 w-full select-none">
       {/* Slider area */}
       <div className="flex-1">
         {/* Track */}
         <div
           ref={trackRef}
-          className="relative cursor-pointer py-5 -my-5"
+          className="relative cursor-pointer py-6 -my-6"
           onMouseDown={(e) => { isDragging.current = true; calcFreq(e.clientX); }}
           onTouchStart={(e) => { isDragging.current = true; calcFreq(e.touches[0].clientX); }}
         >
-          {/* Track line — thin horizontal line */}
-          <div className="w-full h-[1px] bg-white/12" />
-          {/* Needle — simple thin vertical line */}
+          {/* Main Track line — thin horizontal line */}
+          <div className="w-full h-[1px] bg-white/20 relative">
+             {/* Draw tiny ticks for each major number */}
+             {ticks.map((t) => {
+               const tickPct = ((t - freqMin) / (freqMax - freqMin)) * 100;
+               return (
+                 <div 
+                   key={t}
+                   className="absolute top-0 w-[1px] h-1.5 bg-white/10"
+                   style={{ left: `${tickPct}%` }}
+                 />
+               );
+             })}
+          </div>
+
+          {/* Slider puck / needle */}
           <div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 pointer-events-none"
-            style={{ left: `${pct}%` }}
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center justify-center z-10"
+            style={{ left: `${pct}%`, transition: isDragging.current ? 'none' : 'left 0.1s ease-out' }}
           >
-            <div className="w-[1px] h-4 bg-white/70 mx-auto" />
+            {isLocked ? (
+              // Locked state puck (cyan circle with purple dot)
+              <div 
+                className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full"
+                style={{
+                  border: '1.5px solid rgba(34, 211, 238, 0.6)',
+                  boxShadow: '0 0 25px rgba(34, 211, 238, 0.4), inset 0 0 12px rgba(34, 211, 238, 0.3)',
+                  background: 'radial-gradient(circle, rgba(34,211,238,0.15) 0%, transparent 60%)'
+                }}
+              >
+                {/* Purple dot */}
+                <div 
+                  className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full z-10"
+                  style={{
+                    backgroundColor: '#B163FF',
+                    boxShadow: '0 0 12px rgba(177, 99, 255, 0.9)'
+                  }}
+                />
+                {/* Vertical white line pointing up */}
+                <div className="absolute top-0 bottom-1/2 w-[1.5px] bg-white/90" />
+              </div>
+            ) : (
+              // Searching state needle (simple vertical line with faint dot on top)
+              <div className="flex flex-col items-center justify-end">
+                <div className="w-[2px] h-[2px] bg-white/70 rounded-full mb-[2px] shadow-[0_0_6px_rgba(255,255,255,0.6)]" />
+                <div className="w-[1.5px] h-5 bg-white/60" />
+              </div>
+            )}
           </div>
         </div>
 
         {/* Tick labels */}
-        <div className="flex justify-between mt-3 pointer-events-none">
+        <div className="flex justify-between mt-4 pointer-events-none relative z-0 px-[1px]">
           {ticks.map(t => (
-            <span key={t} className="text-[9px] sm:text-[10px] font-mono tracking-wider text-white/25">
+            <span key={t} className="text-[10px] sm:text-[11px] font-mono tracking-wider text-white/40">
               {t}
             </span>
           ))}
         </div>
+        
+        {/* Drag instruction text */}
+        <div className="text-center mt-6 font-mono text-[9px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] text-white/40 uppercase pointer-events-none">
+          Drag horizontally to tune the signal
+        </div>
       </div>
-
-      {/* Tuning knob */}
-      <TuningKnob signalStrength={signalStrength} />
     </div>
   );
 }
@@ -400,23 +414,29 @@ export default function Contact() {
       </div>
 
       {/* ── Bottom controls ──────────────────────────────────────────── */}
-      <div className="relative z-20 w-full px-8 sm:px-16 pb-10 pt-4">
-        <div className="max-w-2xl mx-auto">
-          {/* Frequency readout */}
-          <div className="text-center mb-5 font-mono text-[10px] sm:text-[11px] tracking-[0.3em] text-white/35 flex items-center justify-center gap-4">
-            <span>{signal.frequency.toFixed(1)} MHZ</span>
-            <span className="text-white/15">|</span>
-            <span>SNR {signal.snr >= 0 ? '' : ''}{signal.snr}.0 DB</span>
-          </div>
+      <div className="relative z-20 w-full px-8 sm:px-16 pb-12 pt-4">
+        <div className="max-w-2xl mx-auto flex flex-col items-center">
+          
+          {/* Main tuning area encompassing frequency readout, track, and instruction */}
+          <div className="w-full relative">
+            {/* Frequency readout centered above the track */}
+            <div className="text-center mb-6 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-white/60 flex items-center justify-center gap-4">
+              <span>{signal.frequency.toFixed(1)} MHZ</span>
+              <span className="text-white/20">|</span>
+              <span>SNR {signal.snr >= 0 ? '' : ''}{signal.snr}.0 DB</span>
+            </div>
 
-          {/* Slider + Knob */}
-          <FrequencySlider
-            frequency={signal.frequency}
-            freqMin={signal.freqMin}
-            freqMax={signal.freqMax}
-            onFrequencyChange={signal.setFrequency}
-            signalStrength={signal.signalStrength}
-          />
+            {/* Slider + Knob wrapper */}
+            <FrequencySlider
+              frequency={signal.frequency}
+              freqMin={signal.freqMin}
+              freqMax={signal.freqMax}
+              onFrequencyChange={signal.setFrequency}
+              signalStrength={signal.signalStrength}
+              isLocked={signal.isLocked}
+            />
+          </div>
+          
         </div>
       </div>
 
